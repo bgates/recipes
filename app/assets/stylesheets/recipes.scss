@@ -1,0 +1,50 @@
+// Place all the styles related to the recipes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.recipe-page {
+  display: flex;
+  flex-direction: row;
+}
+.recipe-page > div {
+  flex-basis: 50%;
+}
+h1 {
+  margin-top: 0;
+}
+.recipe-data {
+  display: flex;
+  flex-direction: row;
+  width: 16rem;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.recipe-name {
+  width: 12rem;
+}
+
+.ingredient-name {
+  width: 24rem;
+}
+input[type="number"] {
+  width: 3rem;
+}
+
+a.search {
+  font-size: 0.75rem;
+}
+
+textarea {
+  height: 10rem;
+  width: 100%;
+}
+
+li form {
+  display: inline;
+}
+
+button.save {
+  font-size: 1.5rem;
+  background: hsl(190, 80%, 50%);
+  color: hsl(190, 90%, 99%);
+  border-radius: 0.5rem;
+}

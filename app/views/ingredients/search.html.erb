@@ -1,0 +1,10 @@
+<h1>Search Results: "<%= params[:search] %>"</h1>
+<% if @results %>
+  <ul>  
+    <% @results.each do |result| %>
+      <li title="<%= result['name'] %>">
+        <%= truncate result['name'], length: 50 %> <%= button_to 'Add to db', ingredients_path(id: result['ndbno']), remote: true, form: { data: { type: :json, action: 'ajax:success->recipes#handleIngredientCreation' }} %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

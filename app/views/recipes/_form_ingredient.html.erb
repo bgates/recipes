@@ -1,0 +1,19 @@
+<div data-controller="ingredient-list" data-target="recipes.ingredient">
+  <%= form_ingredient.text_field :ingredient_id, 
+    list: "ingredients", 
+    data: { action: 'change->ingredient-list#replaceId focus->ingredient-list#selectAll', target: 'ingredient-list.name' },
+    class: 'ingredient-name',
+    placeholder: 'ingredient' %>
+  <%= form_ingredient.number_field :unit_number, data: { target: 'ingredient-list.number' } %>
+  <%= form_ingredient.text_field :unit_name,
+    list: "units-#{form_ingredient.index}",
+    data: { action: 'focus->ingredient-list#selectAll' },
+    placeholder: 'tbsp' %>
+  <datalist id="units-<%= form_ingredient.index %>" data-target="ingredient-list.unitList">
+  </datalist>
+  <button data-action="ingredient-list#removeIngredient">Delete</button>
+  <template data-target="ingredient-list.searchTemplate">
+    <p data-target="ingredient-list.link">The ingredient "_" is not in the database. To search for it, click <%= link_to 'here', search_ingredients_path(search: '_'), data: { action: 'recipes#searchIngredient' } %>
+  </template>
+</div>
+

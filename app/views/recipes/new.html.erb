@@ -1,0 +1,49 @@
+<div data-controller="recipes" class="recipe-page">
+  <div>
+    <h1>New Recipe</h1>
+
+    <%= form_with model: @recipe, html: { data: { action: 'ajax:success->recipes#handleCreate', target: 'recipes.form' } } do |f| %>
+
+      <div class="recipe-data">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'recipe-name' %>
+      </div>
+      <div class="recipe-data">
+        <%= f.label :time, 'Prep time (min)' %>
+        <%= f.number_field :time %>
+      </div>
+      <div class="recipe-data">
+        <%= f.label :cooking_time, 'Cooking time (min)' %>
+        <%= f.number_field :cooking_time %>
+      </div>
+      <div class="recipe-data">
+        <%= f.label :servings %>
+        <%= f.number_field :servings %>
+      </div>
+
+      <div data-target="recipes.ingredientList">
+        <h2>Ingredients</h2>
+        <%= f.fields_for :ingredient_amounts do |ia| %>
+          <%= render partial: 'form_ingredient', object: ia %>
+        <% end %>
+      </div>
+      <datalist id="ingredients" data-target="recipes.ingredientOptions">
+        <%= options_for_select Ingredient.all.map{|i| [i.name, i.id, { data: { url: ingredient_size_conversions_path(i) } }]} %>
+      </datalist>
+      <%= link_to 'Add ingredient', '#', data: { action: 'recipes#addIngredient' }, class: 'search' %>
+      <h2>Instructions</h2>
+      <%= f.text_area :instructions %>
+
+      <%= button_tag 'Save', class: 'save', data: { action: 'recipes#intercept' } %>
+
+      <template data-target="recipes.ingredientAmountTemplate">
+        <%= f.fields_for :ingredient_amounts, @recipe.ingredient_amounts.build do |ia| %>
+          <%= render partial: 'form_ingredient', object: ia %>
+        <% end %>
+      </template>
+    <% end %>
+  </div>
+  <div>
+    <div data-target="recipes.searchResults"></div>
+  </div>
+</div>

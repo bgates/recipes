@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ingredient: one
+  label: MyString
+  gram_equivalent: 1.5
+
+two:
+  ingredient: two
+  label: MyString
+  gram_equivalent: 1.5
