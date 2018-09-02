@@ -48,3 +48,8 @@ button.save {
   color: hsl(190, 90%, 99%);
   border-radius: 0.5rem;
 }
+
+.searchResults {
+  height: 18rem;
+  overflow: scroll;
+}

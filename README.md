@@ -31,4 +31,4 @@ recipes have ingredient amounts, which get combined nito grocery list
 
 how often does a recipe contain another recipe?
 
-can a meal also have straight ingredients?
+a meal can have both recipes and ingredients. selecting a recipe gets its name in the field.

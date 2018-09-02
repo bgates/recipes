@@ -5,7 +5,7 @@ class Ingredient < ApplicationRecord
     protein: "Protein",
     fat: "Total lipid (fat)",
     carb: "Carbohydrate, by difference",
-    calorie: "Energy",
+    calories: "Energy",
     fiber: "Fiber, total dietary",
     sugar: "Sugars, total",
     calcium: "Calcium, Ca",

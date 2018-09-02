@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_30_182132) do
+ActiveRecord::Schema.define(version: 2018_09_02_175235) do
 
   create_table "ingredient_amounts", force: :cascade do |t|
     t.float "unit_number"
@@ -23,15 +23,27 @@ ActiveRecord::Schema.define(version: 2018_08_30_182132) do
     t.index ["recipe_id"], name: "index_ingredient_amounts_on_recipe_id"
   end
 
+  create_table "ingredient_line_items", force: :cascade do |t|
+    t.integer "ingredient_id"
+    t.integer "meal_id"
+    t.string "unit_name"
+    t.float "unit_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_ingredient_line_items_on_ingredient_id"
+    t.index ["meal_id"], name: "index_ingredient_line_items_on_meal_id"
+  end
+
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.float "fat"
     t.float "carb"
     t.float "protein"
-    t.float "calorie"
+    t.float "calories"
     t.float "unit_number"
     t.string "unit_name"
     t.float "cost"
+    t.string "ndbno"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "fiber"
@@ -59,7 +71,6 @@ ActiveRecord::Schema.define(version: 2018_08_30_182132) do
     t.float "polyunsaturated_fat"
     t.float "trans_fat"
     t.float "cholesterol"
-    t.integer "ndbno"
   end
 
   create_table "meals", force: :cascade do |t|
@@ -69,11 +80,14 @@ ActiveRecord::Schema.define(version: 2018_08_30_182132) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "meals_recipes", force: :cascade do |t|
-    t.integer "meal_id"
+  create_table "recipe_line_items", force: :cascade do |t|
     t.integer "recipe_id"
-    t.index ["meal_id"], name: "index_meals_recipes_on_meal_id"
-    t.index ["recipe_id"], name: "index_meals_recipes_on_recipe_id"
+    t.integer "meal_id"
+    t.float "servings"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meal_id"], name: "index_recipe_line_items_on_meal_id"
+    t.index ["recipe_id"], name: "index_recipe_line_items_on_recipe_id"
   end
 
   create_table "recipes", force: :cascade do |t|

@@ -3,7 +3,7 @@
 <ul>
   <% @recipes.each do |recipe| %>
     <li><%= recipe.name %> <em>(<%= recipe.servings %> servings)</em>
-    <div><strong>Calories</strong> <%= recipe.calorie.round %> <strong>Protein</strong> <%= recipe.protein.round %> <strong>Fat</strong> <%= recipe.fat.round %> <strong>Carb</strong> <%= recipe.carb.round %></div>
+    <div><strong>Calories</strong> <%= recipe.calories.round %> <strong>Protein</strong> <%= recipe.protein.round %> <strong>Fat</strong> <%= recipe.fat.round %> <strong>Carb</strong> <%= recipe.carb.round %></div>
     </li>
   <% end %>
 </ul>
