@@ -1,0 +1,10 @@
+<h1>Recipes</h1>
+
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li><%= recipe.name %> <em>(<%= recipe.servings %> servings)</em>
+    <div><strong>Calories</strong> <%= recipe.calorie.round %> <strong>Protein</strong> <%= recipe.protein.round %> <strong>Fat</strong> <%= recipe.fat.round %> <strong>Carb</strong> <%= recipe.carb.round %></div>
+    </li>
+  <% end %>
+</ul>
+<%= link_to 'Add recipe', new_recipe_path %>

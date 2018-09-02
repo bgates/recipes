@@ -24,5 +24,11 @@ Things you may want to cover:
 * ...
 
 show the search matches; if one is chosen, save its details to db and add to form
-when form is submitted, need to replace ingredient name w id
 
+there are recipes, which get combined into meals, which are scheduled for datetimes
+
+recipes have ingredient amounts, which get combined nito grocery list
+
+how often does a recipe contain another recipe?
+
+can a meal also have straight ingredients?

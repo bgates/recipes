@@ -3,11 +3,16 @@
     list: "ingredients", 
     data: { action: 'change->ingredient-list#replaceId focus->ingredient-list#selectAll', target: 'ingredient-list.name' },
     class: 'ingredient-name',
+    required: true,
     placeholder: 'ingredient' %>
-  <%= form_ingredient.number_field :unit_number, data: { target: 'ingredient-list.number' } %>
+  <%= form_ingredient.number_field :unit_number, 
+    data: { target: 'ingredient-list.number' },
+    step: 0.01,
+    required: true %>
   <%= form_ingredient.text_field :unit_name,
     list: "units-#{form_ingredient.index}",
     data: { action: 'focus->ingredient-list#selectAll' },
+    required: true,
     placeholder: 'tbsp' %>
   <datalist id="units-<%= form_ingredient.index %>" data-target="ingredient-list.unitList">
   </datalist>

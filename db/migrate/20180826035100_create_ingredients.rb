@@ -5,10 +5,11 @@ class CreateIngredients < ActiveRecord::Migration[5.2]
       t.float :fat
       t.float :carb
       t.float :protein
-      t.float :calorie
+      t.float :calories
       t.float :unit_number
       t.string :unit_name
       t.float :cost
+      t.string :ndbno
 
       t.timestamps
     end

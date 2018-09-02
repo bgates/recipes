@@ -1,41 +1,42 @@
 class Ingredient < ApplicationRecord
   has_many :size_conversions
 
+  NUTRIENTS = { 
+    protein: "Protein",
+    fat: "Total lipid (fat)",
+    carb: "Carbohydrate, by difference",
+    calorie: "Energy",
+    fiber: "Fiber, total dietary",
+    sugar: "Sugars, total",
+    calcium: "Calcium, Ca",
+    iron: "Iron, Fe",
+    magnesium: "Magnesium, Mg",
+    phosphorus: "Phosphorus, P",
+    potassium: "Potassium, K",
+    sodium: "Sodium, Na",
+    zinc: "Zinc, Zn",
+    vitamin_c: "Vitamin C, total ascorbic acid",
+    thiamin: "Thiamin",
+    riboflavin: "Riboflavin",
+    niacin: "Niacin",
+    vitamin_b6: "Vitamin B-6",
+    folate: "Folate, DFE",
+    vitamin_b12: "Vitamin B-12",
+    vitamin_a: "Vitamin A, IU",
+    vitamin_e: "Vitamin E (alpha-tocopherol)",
+    vitamin_d: "Vitamin D",
+    vitamin_k: "Vitamin K (phylloquinone)",
+    saturated_fat: "Fatty acids, total saturated",
+    monounsaturated_fat: "Fatty acids, total monounsaturated",
+    polyunsaturated_fat: "Fatty acids, total polyunsaturated",
+    trans_fat: "Fatty acids, total trans",
+    cholesterol: "Cholesterol"
+  }
+
   # note the values for all nutrients are per 100g of ingredient
   def self.create_with_sizes(hash)
-    params = { name: hash["desc"]["name"] }
-    nutrients = { 
-      protein: "Protein",
-      fat: "Total lipid (fat)",
-      carb: "Carbohydrate, by difference",
-      calorie: "Energy",
-      fiber: "Fiber, total dietary",
-      sugar: "Sugars, total",
-      calcium: "Calcium, Ca",
-      iron: "Iron, Fe",
-      magnesium: "Magnesium, Mg",
-      phosphorus: "Phosphorus, P",
-      potassium: "Potassium, K",
-      sodium: "Sodium, Na",
-      zinc: "Zinc, Zn",
-      vitamin_c: "Vitamin C, total ascorbic acid",
-      thiamin: "Thiamin",
-      riboflavin: "Riboflavin",
-      niacin: "Niacin",
-      vitamin_b6: "Vitamin B-6",
-      folate: "Folate, DFE",
-      vitamin_b12: "Vitamin B-12",
-      vitamin_a: "Vitamin A, IU",
-      vitamin_e: "Vitamin E (alpha-tocopherol)",
-      vitamin_d: "Vitamin D",
-      vitamin_k: "Vitamin K (phylloquinone)",
-      saturated_fat: "Fatty acids, total saturated",
-      monounsaturated_fat: "Fatty acids, total monounsaturated",
-      polyunsaturated_fat: "Fatty acids, total polyunsaturated",
-      trans_fat: "Fatty acids, total trans",
-      cholesterol: "Cholesterol"
-    }
-    nutrients.each do |key, value|
+    params = { name: hash["desc"]["name"], ndbno: hash["desc"]["ndbno"] }
+    NUTRIENTS.each do |key, value|
       params[key] = hash["nutrients"].find{|nutrient| nutrient["name"] === value }.try :[], "value"
     end
     instance = create!(params)
@@ -46,4 +47,7 @@ class Ingredient < ApplicationRecord
     instance
   end
 
+  def grams_in(unit_name)
+    size_conversions.find_by(unit: unit_name).grams
+  end
 end

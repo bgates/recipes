@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.create(recipe_params)
+    render layout: false
   end
 
   def index
@@ -16,6 +17,6 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, ingredient_amounts_attributes: [ :ingredient_id, :unit_name, :unit_number ])
+    params.require(:recipe).permit(:name, :time, :cooking_time, :instructions, :servings, ingredient_amounts_attributes: [ :ingredient_id, :unit_name, :unit_number ])
   end
 end

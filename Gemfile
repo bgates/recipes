@@ -63,3 +63,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'we-call'
 gem 'awesome_print'
 gem 'webpacker'
+gem 'seed_dump'

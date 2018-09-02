@@ -2,11 +2,11 @@
   <div>
     <h1>New Recipe</h1>
 
-    <%= form_with model: @recipe, html: { data: { action: 'ajax:success->recipes#handleCreate', target: 'recipes.form' } } do |f| %>
+    <%= form_with model: @recipe, html: { data: { action: 'ajax:before->recipes#updateForm ajax:success->recipes#handleCreate', target: 'recipes.form' } } do |f| %>
 
       <div class="recipe-data">
         <%= f.label :name %>
-        <%= f.text_field :name, class: 'recipe-name' %>
+        <%= f.text_field :name, class: 'recipe-name', required: true %>
       </div>
       <div class="recipe-data">
         <%= f.label :time, 'Prep time (min)' %>
@@ -34,7 +34,7 @@
       <h2>Instructions</h2>
       <%= f.text_area :instructions %>
 
-      <%= button_tag 'Save', class: 'save', data: { action: 'recipes#intercept' } %>
+      <%= button_tag 'Save', class: 'save' %>
 
       <template data-target="recipes.ingredientAmountTemplate">
         <%= f.fields_for :ingredient_amounts, @recipe.ingredient_amounts.build do |ia| %>

@@ -2,6 +2,10 @@ class IngredientsController < ApplicationController
   layout proc {|controller| controller.request.xhr? ? false: "application" }
   protect_from_forgery except: :search
 
+  def index
+    @ingredients = Ingredient.all
+  end
+
   def search
     if params[:search]
       search_response = NutritionApi.search(params[:search])

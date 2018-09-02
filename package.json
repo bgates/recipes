@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "fullcalendar": "^4.0.0-alpha",
     "stimulus": "^1.1.0"
   },
   "devDependencies": {
