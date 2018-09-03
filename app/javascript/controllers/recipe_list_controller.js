@@ -19,15 +19,17 @@ export default class extends Controller {
 
   get selectedOption() {
     return Array.from(
-      this.mealsController
+      this.parentController
       .recipeOptionsTarget
       .querySelectorAll('option')
     ).find(option => option.value === this.nameTarget.value)
   }
 
-  get mealsController() {
-    const mealsDiv = document.querySelector('.meals-form')
-    return this.application.getControllerForElementAndIdentifier(mealsDiv, 'meals')
+  get parentController() {
+    const parent = this.data.get('parent')
+    const parentDiv = document.querySelector(`.${parent}`)
+    console.log(parent, parentDiv)
+    return this.application.getControllerForElementAndIdentifier(parentDiv, parent)
   }
 
   updateInputRow() {

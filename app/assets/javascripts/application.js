@@ -14,5 +14,6 @@
 //= require activestorage
 //= require turbolinks
 //= require moment/moment
+//= require superagent/superagent
 //= require fullcalendar/dist/fullcalendar
 //= require_tree .

@@ -1,6 +1,6 @@
 <div class="meals-page">
   <div data-controller="calendar" class="calendar"></div>
-  <div data-controller="meals" class="meals-form">
+  <div data-controller="meals" class="meals">
     <h2>Add Meal</h2>
     <%= form_with model: @meal do |f| %>
       <%= f.label :date %>
@@ -12,7 +12,7 @@
 
       <div data-target="meals.recipeList">
         <%= f.fields_for :recipe_line_items do |r| %>
-          <div data-controller="recipe-list">
+          <div data-controller="recipe-list" data-recipe-list-parent="meals">
             <%= r.text_field :recipe_id, 
               list: "recipes", 
               data: { action: 'change->recipe-list#replaceId focus->recipe-list#selectAll', target: 'recipe-list.name' },
@@ -27,18 +27,21 @@
         <%= options_for_select @recipes.map{|recipe| [recipe.name, recipe.id, { data: { servings: recipe.servings } }]} %>
       </datalist>
       <%= link_to 'Add recipe', '#', data: { action: 'meals#addRecipe' }, class: 'search' %>
-      <%= f.fields_for :ingredient_line_items do |i| %>
-        <div>
-          <%= i.text_field :ingredient_id,
-            list: "ingredients",
-            class: 'ingredient-name',
-            required: true,
-            placeholder: 'Food' %>
-          <%= i.number_field :unit_number %>
-          <%= i.text_field :unit_name %>
-        </div>
-      <% end %>
-      <datalist id="ingredients">
+      <div data-target="meals.foodList">
+        <%= f.fields_for :ingredient_line_items do |i| %>
+          <div data-controller="ingredient-list" data-ingredient-list-parent="meals">
+            <%= i.text_field :ingredient_id,
+              list: "ingredients",
+              data: { action: 'change->ingredient-list#replaceId focus->ingredient-list#selectAll', target: 'ingredient-list.name' },
+              class: 'ingredient-name',
+              required: true,
+              placeholder: 'Food' %>
+            <%= i.number_field :unit_number,  data: { target: 'ingredient-list.number' } %>
+            <%= i.text_field :unit_name %>
+          </div>
+        <% end %>
+      </div>
+      <datalist id="ingredients" data-target="meals.ingredientOptions">
         <%= options_for_select Ingredient.all.map{|i| [i.name, i.id, { data: { } }]} %>
       </datalist>
       <%= link_to 'Add food', '#', data: { action: 'meals#addFood' }, class: 'search' %>
@@ -53,6 +56,19 @@
               required: true,
               placeholder: 'Recipe' %>
             <%= r.number_field :servings, data: { target: 'recipe-list.number' } %>
+          </div>
+        <% end %>
+      </template>
+      <template data-target="meals.ingredientAmountTemplate">
+        <%= f.fields_for :ingredient_line_items, @meal.ingredient_line_items.build do |i| %>
+          <div>
+            <%= i.text_field :ingredient_id,
+              list: "ingredients",
+              class: 'ingredient-name',
+              required: true,
+              placeholder: 'Food' %>
+            <%= i.number_field :unit_number %>
+            <%= i.text_field :unit_name %>
           </div>
         <% end %>
       </template>

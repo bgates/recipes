@@ -1,4 +1,4 @@
-<div data-controller="ingredient-list" data-target="recipes.ingredient">
+<div data-controller="ingredient-list" data-target="recipes.ingredient" data-ingredient-list-parent="recipes">
   <%= form_ingredient.text_field :ingredient_id, 
     list: "ingredients", 
     data: { action: 'change->ingredient-list#replaceId focus->ingredient-list#selectAll', target: 'ingredient-list.name' },

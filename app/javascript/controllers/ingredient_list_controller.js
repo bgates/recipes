@@ -19,21 +19,24 @@ export default class extends Controller {
 
   get selectedOption() {
     return Array.from(
-      this.recipeController
-      .ingredientOptionsTarget
-      .querySelectorAll('option')
+      this.parentController
+        .ingredientOptionsTarget
+        .querySelectorAll('option')
     ).find(option => option.value === this.nameTarget.value)
   }
 
-  get recipeController() {
-    const recipeDiv = document.querySelector('.recipe-page')
-    return this.application.getControllerForElementAndIdentifier(recipeDiv, 'recipes')
+  get parentController() {
+    const parent = this.data.get('parent')
+    const parentDiv = document.querySelector(`.${parent}`)
+    return this.application.getControllerForElementAndIdentifier(parentDiv, parent)
   }
 
   updateInputRow() {
-    fetch(this.selectedOption.getAttribute('data-url'))
-      .then(response => response.text())
-      .then(html => this.unitListTarget.innerHTML = html)
+    if (this.selectedOption.hasAttribute('data-url')) {
+      fetch(this.selectedOption.getAttribute('data-url'))
+        .then(response => response.text())
+        .then(html => this.unitListTarget.innerHTML = html)
+    }
     this.nameTarget.setAttribute('data-id', this.selectedOption.value)
     this.nameTarget.value = this.selectedOption.textContent
     this.numberTarget.focus()

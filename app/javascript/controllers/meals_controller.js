@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['recipeTemplate', 'recipeList', 'ingredientAmountTemplate', 'ingredientList', 'recipeOptions', 'searchResults', 'form', 'ingredient']
+  static targets = ['recipeTemplate', 'recipeList', 'ingredientAmountTemplate', 'foodList', 'recipeOptions', 'searchResults', 'form', 'ingredient', 'ingredientOptions']
 
   addRecipe(event) {
     event.preventDefault()
@@ -14,12 +14,12 @@ export default class extends Controller {
     template.innerHTML = template.innerHTML.replace(/step="([\d\.]+)"/g, 'step="0.01"')
   }
 
-  addIngredient(event) {
+  addFood(event) {
     event.preventDefault()
     const template = this.ingredientAmountTemplateTarget
-    const list = this.ingredientListTarget
-    const newIngredient = template.innerHTML
-    list.insertAdjacentHTML('beforeend', newIngredient)
+    const list = this.foodListTarget
+    const newFood = template.innerHTML
+    list.insertAdjacentHTML('beforeend', newFood)
     list.lastElementChild.querySelector('input').focus()
     template.innerHTML = template.innerHTML.replace(/(\d+)/g, (_, p1) => parseInt(p1) + 1)
     template.innerHTML = template.innerHTML.replace(/step="([\d\.]+)"/g, 'step="0.01"')
