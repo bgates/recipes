@@ -1,0 +1,10 @@
+<div data-controller="recipe-list" data-recipe-list-parent="meals">
+  <%= recipe_line_item.text_field :recipe_id, 
+    list: "recipes", 
+    data: { action: 'change->recipe-list#replaceId focus->recipe-list#selectAll', target: 'recipe-list.name' },
+    class: 'recipe-name',
+    required: true,
+    placeholder: 'Recipe' %>
+  <%= recipe_line_item.number_field :servings, data: { target: 'recipe-list.number' } %>
+</div>
+

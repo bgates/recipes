@@ -1,0 +1,11 @@
+<div data-controller="ingredient-list" data-ingredient-list-parent="meals">
+  <%= ingredient_line_item.text_field :ingredient_id,
+    list: "ingredients",
+    data: { action: 'change->ingredient-list#replaceId focus->ingredient-list#selectAll', target: 'ingredient-list.name' },
+    class: 'ingredient-name',
+    required: true,
+    placeholder: 'Food' %>
+  <%= ingredient_line_item.number_field :unit_number,  data: { target: 'ingredient-list.number' } %>
+  <%= ingredient_line_item.text_field :unit_name %>
+</div>
+

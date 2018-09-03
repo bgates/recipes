@@ -12,15 +12,7 @@
 
       <div data-target="meals.recipeList">
         <%= f.fields_for :recipe_line_items do |r| %>
-          <div data-controller="recipe-list" data-recipe-list-parent="meals">
-            <%= r.text_field :recipe_id, 
-              list: "recipes", 
-              data: { action: 'change->recipe-list#replaceId focus->recipe-list#selectAll', target: 'recipe-list.name' },
-              class: 'recipe-name',
-              required: true,
-              placeholder: 'Recipe' %>
-            <%= r.number_field :servings, data: { target: 'recipe-list.number' } %>
-          </div>
+          <%= render partial: 'recipe_line_item', object: r %>
         <% end %>
       </div>
       <datalist id="recipes" data-target="meals.recipeOptions">
@@ -29,16 +21,7 @@
       <%= link_to 'Add recipe', '#', data: { action: 'meals#addRecipe' }, class: 'search' %>
       <div data-target="meals.foodList">
         <%= f.fields_for :ingredient_line_items do |i| %>
-          <div data-controller="ingredient-list" data-ingredient-list-parent="meals">
-            <%= i.text_field :ingredient_id,
-              list: "ingredients",
-              data: { action: 'change->ingredient-list#replaceId focus->ingredient-list#selectAll', target: 'ingredient-list.name' },
-              class: 'ingredient-name',
-              required: true,
-              placeholder: 'Food' %>
-            <%= i.number_field :unit_number,  data: { target: 'ingredient-list.number' } %>
-            <%= i.text_field :unit_name %>
-          </div>
+          <%= render partial: 'ingredient_line_item', object: i %>
         <% end %>
       </div>
       <datalist id="ingredients" data-target="meals.ingredientOptions">
@@ -48,28 +31,12 @@
       <%= button_tag 'Save', class: 'save' %>
       <template data-target="meals.recipeTemplate">
         <%= f.fields_for :recipe_line_items, @meal.recipe_line_items.build do |r| %>
-          <div data-controller="recipe-list">
-            <%= r.text_field :recipe_id, 
-              list: "recipes", 
-              data: { action: 'change->recipe-list#replaceId focus->recipe-list#selectAll', target: 'recipe-list.name' },
-              class: 'recipe-name',
-              required: true,
-              placeholder: 'Recipe' %>
-            <%= r.number_field :servings, data: { target: 'recipe-list.number' } %>
-          </div>
+          <%= render partial: 'recipe_line_item', object: r %>
         <% end %>
       </template>
       <template data-target="meals.ingredientAmountTemplate">
         <%= f.fields_for :ingredient_line_items, @meal.ingredient_line_items.build do |i| %>
-          <div>
-            <%= i.text_field :ingredient_id,
-              list: "ingredients",
-              class: 'ingredient-name',
-              required: true,
-              placeholder: 'Food' %>
-            <%= i.number_field :unit_number %>
-            <%= i.text_field :unit_name %>
-          </div>
+          <%= render partial: 'ingredient_line_item', object: i %>
         <% end %>
       </template>
     <% end %>
