@@ -23,7 +23,6 @@ Things you may want to cover:
 
 * ...
 
-show the search matches; if one is chosen, save its details to db and add to form
 
 there are recipes, which get combined into meals, which are scheduled for datetimes
 
@@ -31,4 +30,3 @@ recipes have ingredient amounts, which get combined nito grocery list
 
 how often does a recipe contain another recipe?
 
-a meal can have both recipes and ingredients. selecting a recipe gets its name in the field.

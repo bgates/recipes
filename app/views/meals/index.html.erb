@@ -2,13 +2,15 @@
   <div data-controller="calendar" class="calendar"></div>
   <div data-controller="meals" class="meals">
     <h2>Add Meal</h2>
-    <%= form_with model: @meal do |f| %>
-      <%= f.label :date %>
-      <%= f.select :date do %>
-        <%= options_for_select Date.today.all_week(:sunday).map{|date| [date.strftime("%A"), date] } %>
-      <% end %>
-      <%= f.label :time %>
-      <%= f.select :time, %w{Breakfast Lunch Dinner} %>
+    <%= form_with model: @meal, html: { data: { action: 'ajax:before->meals#updateForm ajax:success->meals#handleCreate', target: 'meals.form' } } do |f| %> 
+      <div class="time">
+        <%= f.label :date %>
+        <%= f.select :date do %>
+          <%= options_for_select Date.today.all_week(:sunday).map{|date| [date.strftime("%A"), date] } %>
+        <% end %>
+        <%= f.label :time %>
+        <%= f.select :time, %w{Breakfast Lunch Dinner} %>
+      </div>
 
       <div data-target="meals.recipeList">
         <%= f.fields_for :recipe_line_items do |r| %>
@@ -28,7 +30,9 @@
         <%= options_for_select Ingredient.all.map{|i| [i.name, i.id, { data: { } }]} %>
       </datalist>
       <%= link_to 'Add food', '#', data: { action: 'meals#addFood' }, class: 'search' %>
-      <%= button_tag 'Save', class: 'save' %>
+      <div>
+        <%= button_tag 'Save', class: 'save' %>
+      </div>
       <template data-target="meals.recipeTemplate">
         <%= f.fields_for :recipe_line_items, @meal.recipe_line_items.build do |r| %>
           <%= render partial: 'recipe_line_item', object: r %>

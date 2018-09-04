@@ -7,15 +7,17 @@ class IngredientsController < ApplicationController
   end
 
   def search
-    if params[:search]
-      search_response = NutritionApi.search(params[:search])
-      @results = search_response[:items]
-    elsif params[:id]
-      search_response = NutritionApi.find(params[:id])
-      @item = search_response
-    end
+    search_response = NutritionApi.search(params[:search])
+    @results = search_response[:items]
     respond_to do |format|
-      format.js { render template: 'ingredients/search.html.erb' }
+      format.js do
+        if @results.nil?
+          @ingredient = Ingredient.new
+          render template: 'ingredients/new.html.erb'
+        else
+          render template: 'ingredients/search.html.erb' 
+        end
+      end
     end
   end
 

@@ -28,7 +28,6 @@ export default class extends Controller {
   get parentController() {
     const parent = this.data.get('parent')
     const parentDiv = document.querySelector(`.${parent}`)
-    console.log(parent, parentDiv)
     return this.application.getControllerForElementAndIdentifier(parentDiv, parent)
   }
 
@@ -44,22 +43,13 @@ export default class extends Controller {
     } */
   }
 
-  showSearchLink() {
-    const selection = this.nameTarget.value
-    this.nameTarget.value = ''
-    const link = this.searchTemplateTarget.innerHTML.replace(/_/g, selection)
-    this.element.insertAdjacentHTML('beforeEnd', link)
-    this.element.lastElementChild.setAttribute('data-active', true)
-  }
-
   selectAll(event) {
     event.target.select()
   }
 
-  removeIngredient(event) {
+  removeRecipe(event) {
     event.preventDefault()
     this.element.remove()
   }
 }
-
 

@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.create(recipe_params)
-    render layout: false
+    render plain: "Recipe created - #{@recipe.name}"
   end
 
   def index

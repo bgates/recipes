@@ -1,0 +1,27 @@
+<h2>Not Found</h2>
+<p>No ingredient by that name could be found in the USDA database. Please enter the details manually.</p>
+
+<%= form_with model: @ingredient do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <h3>Macros (per 100g)</h3>
+  <div>
+    <%= f.label :calories %>
+    <%= f.number_field :calories %>
+  </div>
+  <div>
+    <%= f.label :protein %>
+    <%= f.number_field :protein %>
+  </div>
+  <div>
+    <%= f.label :fat %>
+    <%= f.number_field :fat %>
+  </div>
+  <div>
+    <%= f.label :carbs %>
+    <%= f.number_field :carbs %>
+  </div>
+
+<% end %>

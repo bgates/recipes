@@ -40,7 +40,7 @@ export default class extends Controller {
     nameField.dispatchEvent(new Event('change'))
   }
 
-  updateForm(a, b, c) {
+  updateForm() {
     this.ingredientTargets
       .map(elm => this.application.getControllerForElementAndIdentifier(elm, 'ingredient-list'))
       .forEach(ctrl => ctrl.replaceName())
@@ -54,8 +54,8 @@ export default class extends Controller {
     })
     Array.from(this.element.querySelectorAll('input')).forEach(input => input.value = '')
     this.element.querySelector('textarea').value = ''
-    this.element.innerHTML += event.detail[2].response
-    const snackbar = this.element.querySelector('.snackbar')
+    const snackbar = document.querySelector('.snackbar')
+    snackbar.textContent = event.detail[2].response
     snackbar.classList.add('show')
     setTimeout(() => snackbar.classList.remove('show'), 2000)
     setTimeout(() => snackbar.remove(), 5000)
