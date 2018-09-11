@@ -53,5 +53,6 @@ export default class extends Controller {
     setTimeout(() => snackbar.classList.remove('show'), 2000)
     setTimeout(() => snackbar.remove(), 5000)
   }
+
 }
 

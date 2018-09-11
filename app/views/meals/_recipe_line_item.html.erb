@@ -6,5 +6,6 @@
     required: true,
     placeholder: 'Recipe' %>
   <%= recipe_line_item.number_field :servings, data: { target: 'recipe-list.number' } %>
+  <button data-action="recipe-list#removeRecipe">Delete</button>
 </div>
 

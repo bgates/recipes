@@ -6,7 +6,7 @@ class MealsController < ApplicationController
     @recipes = Recipe.all
     respond_to do |format|
       format.html
-      format.json { render json: [] }
+      format.json { render json: Meal.this_week }
       #  {
       #    title: 'Breakfast',
       #    start: '2018-09-03T08:00:00',
