@@ -14,6 +14,10 @@ class IngredientsController < ApplicationController
     @ingredients = Ingredient.all
   end
 
+  def show
+    @ingredient = Ingredient.find(params[:id])
+  end
+
   def search
     search_response = NutritionApi.search(params[:search])
     @results = search_response[:items]

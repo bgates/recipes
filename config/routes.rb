@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :meals
   resources :recipes
-  resources :ingredients, only: [ :create, :index ] do
+  resources :ingredients, only: [ :create, :index, :show ] do
     collection do
       get :search
       get :minerals

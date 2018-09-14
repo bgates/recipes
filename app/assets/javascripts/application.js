@@ -17,4 +17,5 @@
 //= require superagent/superagent
 //= require fullcalendar/dist/fullcalendar
 //= require msg-modal/dist/msg.min
+//= require list.js/dist/list.min
 //= require_tree .
