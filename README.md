@@ -30,3 +30,7 @@ recipes have ingredient amounts, which get combined nito grocery list
 
 how often does a recipe contain another recipe?
 
+* prosciutto
+* smoked paprika
+* chili adopo
+* dijon mustard

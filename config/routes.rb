@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :ingredients, only: [ :create, :index ] do
     collection do
       get :search
+      get :minerals
+      get :vitamins
     end
     resources :size_conversions, only: [ :index ]
   end

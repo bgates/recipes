@@ -33,6 +33,10 @@ class Ingredient < ApplicationRecord
     cholesterol: "Cholesterol"
   }
 
+  MINERALS = [ :calcium, :iron, :magnesium, :phosphorus, :potassium, :sodium, :zinc  ]
+  
+  VITAMINS = [ :vitamin_a, :thiamin, :riboflavin, :niacin, :vitamin_b6, :vitamin_b12, :folate, :vitamin_c, :vitamin_d, :vitamin_e, :vitamin_k ]
+  
   # note the values for all nutrients are per 100g of ingredient
   def self.create_with_sizes(hash)
     params = { name: hash["desc"]["name"], ndbno: hash["desc"]["ndbno"] }

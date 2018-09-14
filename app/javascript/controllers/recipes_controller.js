@@ -58,6 +58,5 @@ export default class extends Controller {
     snackbar.textContent = event.detail[2].response
     snackbar.classList.add('show')
     setTimeout(() => snackbar.classList.remove('show'), 2000)
-    setTimeout(() => snackbar.remove(), 5000)
   }
 }

@@ -1,0 +1,23 @@
+<h1>Ingredients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <% Ingredient::MINERALS.each do |mineral| %>
+        <th><%= Ingredient::NUTRIENTS[mineral] %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  <% @ingredients.each do |ingredient| %>
+    <tr>
+      <td><%= ingredient.name %></td>
+      <% Ingredient::MINERALS.each do |mineral| %>
+        <td><%= ingredient.send mineral %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

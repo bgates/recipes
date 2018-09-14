@@ -6,6 +6,14 @@ class IngredientsController < ApplicationController
     @ingredients = Ingredient.all
   end
 
+  def minerals
+    @ingredients = Ingredient.all
+  end
+
+  def vitamins
+    @ingredients = Ingredient.all
+  end
+
   def search
     search_response = NutritionApi.search(params[:search])
     @results = search_response[:items]

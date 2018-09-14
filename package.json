@@ -4,6 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "fullcalendar": "^4.0.0-alpha",
+    "msg-modal": "^11.2.0",
     "stimulus": "^1.1.0"
   },
   "devDependencies": {

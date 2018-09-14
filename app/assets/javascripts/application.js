@@ -16,4 +16,5 @@
 //= require moment/moment
 //= require superagent/superagent
 //= require fullcalendar/dist/fullcalendar
+//= require msg-modal/dist/msg.min
 //= require_tree .
