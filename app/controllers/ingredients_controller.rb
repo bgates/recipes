@@ -15,7 +15,7 @@ class IngredientsController < ApplicationController
   end
 
   def show
-    @ingredient = Ingredient.find(params[:id])
+    @ingredient = Ingredient.includes(:size_conversions).find(params[:id])
   end
 
   def search

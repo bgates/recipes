@@ -1,3 +1,8 @@
 <h1><%= @ingredient.name %></h1>
 
+<ul>
+  <% @ingredient.size_conversions.each do |size| %>
+    <li><%= size.amount unless size.amount == 1 %> <%= size.unit %> = <%= size.gram_equivalent %>g</li>
+  <% end %>
+</ul>
 

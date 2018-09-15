@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_02_175235) do
+ActiveRecord::Schema.define(version: 2018_09_15_013411) do
 
   create_table "ingredient_amounts", force: :cascade do |t|
     t.float "unit_number"
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 2018_09_02_175235) do
     t.float "polyunsaturated_fat"
     t.float "trans_fat"
     t.float "cholesterol"
+    t.integer "size_conversion_id"
+    t.index ["size_conversion_id"], name: "index_ingredients_on_size_conversion_id"
   end
 
   create_table "meals", force: :cascade do |t|

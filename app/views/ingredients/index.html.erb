@@ -13,7 +13,7 @@
   <tbody class="list">
   <% @ingredients.each do |ingredient| %>
     <tr>
-      <td class="name"><%= ingredient.name %></td>
+      <td class="name"><%= link_to ingredient.name, [ ingredient, :edit ] %></td>
       <td class="calories"><%= ingredient.calories %></td>
       <td class="fat"><%= ingredient.fat %></td>
       <td class="protein"><%= ingredient.protein %></td>

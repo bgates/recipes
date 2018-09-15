@@ -1,5 +1,5 @@
 class Ingredient < ApplicationRecord
-  has_many :size_conversions
+  has_many :size_conversions, -> { order(gram_equivalent: :desc) }
 
   NUTRIENTS = { 
     protein: "Protein",
