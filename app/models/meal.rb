@@ -8,16 +8,7 @@ class Meal < ApplicationRecord
   has_many :ingredients, through: :ingredient_line_items
 
   def self.this_week
-    where('date >= ?', Date.today.beginning_of_week(:sunday)).map do |meal|
-      meal.as_json(
-        except: [ :id, :created_at ], 
-        include: { 
-          recipe_line_items: { only: :servings, methods: :name }, 
-          ingredient_line_items: { only: [ :unit_name, :unit_number ], methods: :name } 
-        },
-        methods: [ :start, :title ]
-      )
-    end
+    where('date >= ?', Date.today.beginning_of_week(:sunday)).map(&:for_calendar)
   end
 
   def start
@@ -34,5 +25,16 @@ class Meal < ApplicationRecord
 
   def title
     recipes.first.name
+  end
+
+  def for_calendar
+    self.as_json(
+      except: [ :id, :created_at, :updated_at ], 
+      include: { 
+        recipe_line_items: { only: :servings, methods: :name }, 
+        ingredient_line_items: { only: [ :unit_name, :unit_number ], methods: :name } 
+      },
+      methods: [ :start, :title ]
+    )
   end
 end

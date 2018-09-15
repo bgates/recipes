@@ -27,21 +27,6 @@ export default class extends Controller {
         url: '/meals.json',
         type: 'GET'
       }
-      /* events: [
-        {
-          title: 'Lunch',
-          start: '2018-09-02T12:30:00',
-        },
-        {
-          title: 'Breakfast',
-          start: '2018-09-03T08:00:00',
-          end:   '2018-09-03T09:00:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2018-09-03T12:00:00'
-        },
-      ] */
     });
     this.calendar.render();
   }

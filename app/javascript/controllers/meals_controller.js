@@ -34,6 +34,11 @@ export default class extends Controller {
       .forEach(ctrl => ctrl.replaceName())
   }
     
+  get calendar() {
+    const controller = this.application.getControllerForElementAndIdentifier(document.querySelector('[data-controller="calendar"]'), 'calendar')
+    return controller.calendar
+  }
+
   handleCreate(event) {
     this.ingredientTargets.forEach((elm, i) => {
       if (i > 0) {
@@ -46,8 +51,9 @@ export default class extends Controller {
       }
     })
     Array.from(this.element.querySelectorAll('input')).forEach(input => input.value = '')
-    // this.element.innerHTML += event.detail[2].response // send to calendar
-    console.log(JSON.parse(event.detail[2].response))
+    const mealDetails = JSON.parse(event.detail[2].response)
+    this.calendar.renderEvent(mealDetails)
+          
     const snackbar = document.querySelector('.snackbar')
     snackbar.classList.add('show')
     setTimeout(() => snackbar.classList.remove('show'), 2000)
