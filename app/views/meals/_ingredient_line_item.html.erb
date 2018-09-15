@@ -6,6 +6,12 @@
     required: true,
     placeholder: 'Food' %>
   <%= ingredient_line_item.number_field :unit_number,  data: { target: 'ingredient-list.number' } %>
-  <%= ingredient_line_item.text_field :unit_name %>
+  <%= ingredient_line_item.text_field :unit_name,
+    list: "units-#{ingredient_line_item.index}",
+    data: { action: 'focus->ingredient-list#selectAll' },
+    required: true,
+    placeholder: 'tbsp' %>
+  <datalist id="units-<%= ingredient_line_item.index %>" data-target="ingredient-list.unitList">
+  </datalist>
 </div>
 

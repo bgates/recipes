@@ -32,5 +32,10 @@ how often does a recipe contain another recipe?
 
 * prosciutto
 * smoked paprika
-* chili adopo
+* chili adobo
 * dijon mustard
+
+navigation
+have food choices in meals#index include proper sizes
+show daily macros on meals#index
+insert newly created meal onto calendar
