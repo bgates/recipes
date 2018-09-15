@@ -1,5 +1,7 @@
 class Ingredient < ApplicationRecord
   has_many :size_conversions, -> { order(gram_equivalent: :desc) }
+  belongs_to :serving_size, class_name: "SizeConversion", foreign_key: :size_conversion_id, optional: true
+  accepts_nested_attributes_for :size_conversions
 
   NUTRIENTS = { 
     protein: "Protein",
@@ -53,5 +55,17 @@ class Ingredient < ApplicationRecord
 
   def grams_in(unit_name)
     size_conversions.find_by(unit: unit_name).grams
+  end
+
+  def serving_size_name
+    serving_size ? "#{serving_size.amount} #{serving_size.unit}" : "100g"
+  end
+
+  def serving_size_g
+    serving_size ? serving_size.gram_equivalent : 100
+  end
+
+  def per_serving(nutrient)
+    serving_size_g / 100.0 * send(nutrient)
   end
 end

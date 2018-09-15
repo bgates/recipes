@@ -4,6 +4,7 @@
   <thead>
     <tr data-action="click->table#sort">
       <th data-type="name">Name</th>
+      <th>Serving Size</th>
       <th data-type="calories">Calories</th>
       <th data-type="fat">Fat</th>
       <th data-type="protein">Protein</th>
@@ -13,11 +14,12 @@
   <tbody class="list">
   <% @ingredients.each do |ingredient| %>
     <tr>
-      <td class="name"><%= link_to ingredient.name, [ ingredient, :edit ] %></td>
-      <td class="calories"><%= ingredient.calories %></td>
-      <td class="fat"><%= ingredient.fat %></td>
-      <td class="protein"><%= ingredient.protein %></td>
-      <td class="carb"><%= ingredient.carb %></td>
+      <td class="name"><%= link_to ingredient.name, [ :edit, ingredient ] %></td>
+      <td><%= round ingredient.serving_size_name %></td>
+      <td class="calories"><%= round ingredient.per_serving(:calories) %></td>
+      <td class="fat"><%= round ingredient.per_serving(:fat) %></td>
+      <td class="protein"><%= round ingredient.per_serving(:protein) %></td>
+      <td class="carb"><%= round ingredient.per_serving(:carb) %></td>
     </tr>
   <% end %>
   </tbody>

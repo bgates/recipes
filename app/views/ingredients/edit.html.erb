@@ -6,3 +6,32 @@
   <% end %>
 </ul>
 
+<%= form_with model: @ingredient do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :size_conversion_id, 'Reference Size' %>
+    <%= f.select :size_conversion_id, @ingredient.size_conversions.map{|size| [ size.unit, size.id ]} %>
+  </div>
+  <% if false %>
+  <%= f.fields_for :size_conversions, @ingredient.size_conversions.build do |s| %>
+    <div>
+      <%= s.label :amount %>
+      <%= s.number_field :amount %>
+    </div>
+    <div>
+      <%= s.label :unit %>
+      <%= s.text_field :unit %>
+    </div>
+    <div>
+      <%= s.label :gram_equivalent %>
+      <%= s.number_field :gram_equivalent %>
+    </div>
+  <% end %>
+  <% end %>
+  <%= button_tag 'Update' %>
+<% end %>
+

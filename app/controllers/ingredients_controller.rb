@@ -3,7 +3,7 @@ class IngredientsController < ApplicationController
   protect_from_forgery except: :search
 
   def index
-    @ingredients = Ingredient.all
+    @ingredients = Ingredient.includes(:serving_size, :size_conversions).all
   end
 
   def minerals
@@ -14,8 +14,14 @@ class IngredientsController < ApplicationController
     @ingredients = Ingredient.all
   end
 
-  def show
+  def edit
     @ingredient = Ingredient.includes(:size_conversions).find(params[:id])
+  end
+
+  def update
+    @ingredient = Ingredient.find(params[:id])
+    @ingredient.update(ingredient_params)
+    redirect_to ingredients_url
   end
 
   def search
@@ -43,4 +49,10 @@ class IngredientsController < ApplicationController
     end
   end
 
+private
+
+  def ingredient_params
+    params.require(:ingredient).permit(:name, :size_conversion_id, size_conversions_attributes: [ :unit, :gram_equivalent, :amount ])
+  end
 end
+
