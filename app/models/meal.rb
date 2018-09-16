@@ -8,7 +8,7 @@ class Meal < ApplicationRecord
   has_many :ingredients, through: :ingredient_line_items
 
   def self.this_week
-    where('date >= ?', Date.today.beginning_of_week(:sunday)).map(&:for_calendar)
+    where('date >= ?', Date.today.beginning_of_week(:sunday))
   end
 
   def start
@@ -36,5 +36,11 @@ class Meal < ApplicationRecord
       },
       methods: [ :start, :title ]
     )
+  end
+
+  Ingredient::NUTRIENTS.keys.each do |nutrient|
+    define_method nutrient do
+      recipe_line_items.map(&nutrient).sum # + ingredient_line_items.map(&nutrient).sum
+    end
   end
 end

@@ -45,5 +45,13 @@
       </template>
     <% end %>
     <%= link_to 'Add recipe to db', new_recipe_path %>
+    <section>
+      <h2>Macros</h2>
+      <ul>
+        <% @meals.each do |meal| %>
+          <li><%= meal.title %>: <%= round meal.calories %> [<%= round meal.protein %>P | <%= round meal.fat %>F | <%= round meal.carb %>C]</li>
+        <% end %>
+      </ul>
+    </section>
   </div>
 </div>

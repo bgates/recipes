@@ -4,9 +4,10 @@ class MealsController < ApplicationController
     @meal = Meal.new
     @meal.recipe_line_items.build
     @recipes = Recipe.all
+    @meals = Meal.this_week
     respond_to do |format|
       format.html
-      format.json { render json: Meal.this_week }
+      format.json { render json: @meals.map(&:for_calendar) }
     end
   end
 
