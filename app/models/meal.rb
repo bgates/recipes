@@ -7,8 +7,10 @@ class Meal < ApplicationRecord
   accepts_nested_attributes_for :ingredient_line_items
   has_many :ingredients, through: :ingredient_line_items
 
-  def self.this_week
-    where('date >= ?', Date.today.beginning_of_week(:sunday))
+  def self.for_week(start, finish)
+    start = start ? Date.parse(start) : Date.today.beginning_of_week(:sunday)
+    finish = finish ? Date.parse(finish) : 7.days.after(start)
+    where('date <= ? AND date >= ?', finish, start)
   end
 
   def start
@@ -41,6 +43,12 @@ class Meal < ApplicationRecord
   Ingredient::NUTRIENTS.keys.each do |nutrient|
     define_method nutrient do
       recipe_line_items.map(&nutrient).sum # + ingredient_line_items.map(&nutrient).sum
+    end
+  end
+
+  def macros 
+    Ingredient::MACROS.each_with_object({}) do |macro, memo|
+      memo[macro] = self.send macro
     end
   end
 end

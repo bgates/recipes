@@ -4,10 +4,10 @@ class MealsController < ApplicationController
     @meal = Meal.new
     @meal.recipe_line_items.build
     @recipes = Recipe.all
-    @meals = Meal.this_week
+    @meals = Meal.for_week(params[:start], params[:end]).includes(:recipes, :ingredients)
     respond_to do |format|
-      format.html
-      format.json { render json: @meals.map(&:for_calendar) }
+      format.html { @meals_by_date = @meals.group_by{|meal| Date::DAYNAMES[meal.date.wday] } }
+      format.json
     end
   end
 
@@ -16,6 +16,9 @@ class MealsController < ApplicationController
     render json: @meal.for_calendar
   end
 
+  def show
+    @meal = Meal.find(params[:id])
+  end
 private
 
   def meal_params

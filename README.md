@@ -36,4 +36,5 @@ how often does a recipe contain another recipe?
 * dijon mustard
 
 navigation
-show daily macros on meals#index
+
+show meal detail in popup and allow editing  / deletion

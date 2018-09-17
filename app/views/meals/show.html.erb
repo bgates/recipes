@@ -1,0 +1,10 @@
+<h1><%= @meal.time %></h1>
+
+<h2><%= @meal.title %></h2>
+
+<h3>Macros</h3>
+<ul>
+  <% @meal.macros.each do |macro, value| %>
+    <li><%= macro %>: <%= round value %></li>
+  <% end %>
+</ul>

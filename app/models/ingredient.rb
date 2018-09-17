@@ -39,6 +39,7 @@ class Ingredient < ApplicationRecord
   
   VITAMINS = [ :vitamin_a, :thiamin, :riboflavin, :niacin, :vitamin_b6, :vitamin_b12, :folate, :vitamin_c, :vitamin_d, :vitamin_e, :vitamin_k ]
   
+  MACROS = [ :calories, :protein, :fat, :carb ]
   # note the values for all nutrients are per 100g of ingredient
   def self.create_with_sizes(hash)
     params = { name: hash["desc"]["name"], ndbno: hash["desc"]["ndbno"] }

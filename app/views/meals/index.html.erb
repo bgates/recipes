@@ -47,11 +47,24 @@
     <%= link_to 'Add recipe to db', new_recipe_path %>
     <section>
       <h2>Macros</h2>
-      <ul>
-        <% @meals.each do |meal| %>
-          <li><%= meal.title %>: <%= round meal.calories %> [<%= round meal.protein %>P | <%= round meal.fat %>F | <%= round meal.carb %>C]</li>
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th><th title="calories">Calories</th><th title="protein">Protein</th><th title="fat">Fat</th><th title="carbohydrate">Carb</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @meals_by_date.each do |day, meals| %>
+          <tr>
+            <td><%= day %></td>
+            <td><%= round meals.sum(&:calories) %></td>
+            <td><%= round meals.sum(&:protein) %></td>
+            <td><%= round meals.sum(&:fat) %></td>
+            <td><%= round meals.sum(&:carb) %></td>
+          </tr>
         <% end %>
-      </ul>
+        </tbody>
+      </table>
     </section>
   </div>
 </div>

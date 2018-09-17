@@ -16,12 +16,11 @@ export default class extends Controller {
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       eventClick: (calEvent, jsEvent, view) => {
+        fetch(calEvent.url)
+          .then(response => response.text())
+          .then(this.modal.show)
         console.log(calEvent, jsEvent, view)
-        this.modal.show(
-          `<h2>${calEvent.time}</h2>
-          <p>${calEvent.title}</p>
-          `
-        )
+        return false
       },
       events: {
         url: '/meals.json',
