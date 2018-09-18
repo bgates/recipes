@@ -8,3 +8,8 @@
     <li><%= macro %>: <%= round value %></li>
   <% end %>
 </ul>
+<%= button_to 'Delete', @meal, 
+  method: :delete, 
+  remote: true,
+  form: { data: { controller: 'meals', action: 'ajax:success->meals#deleteMeal' } }
+%>

@@ -29,17 +29,6 @@ class Meal < ApplicationRecord
     recipes.first.name
   end
 
-  def for_calendar
-    self.as_json(
-      except: [ :id, :created_at, :updated_at ], 
-      include: { 
-        recipe_line_items: { only: :servings, methods: :name }, 
-        ingredient_line_items: { only: [ :unit_name, :unit_number ], methods: :name } 
-      },
-      methods: [ :start, :title ]
-    )
-  end
-
   Ingredient::NUTRIENTS.keys.each do |nutrient|
     define_method nutrient do
       recipe_line_items.map(&nutrient).sum # + ingredient_line_items.map(&nutrient).sum

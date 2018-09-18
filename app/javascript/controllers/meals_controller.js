@@ -34,9 +34,12 @@ export default class extends Controller {
       .forEach(ctrl => ctrl.replaceName())
   }
     
+  get calendarController() {
+    return this.application.getControllerForElementAndIdentifier(document.querySelector('[data-controller="calendar"]'), 'calendar')
+  }
+    
   get calendar() {
-    const controller = this.application.getControllerForElementAndIdentifier(document.querySelector('[data-controller="calendar"]'), 'calendar')
-    return controller.calendar
+    return this.calendarController.calendar
   }
 
   handleCreate(event) {
@@ -60,5 +63,10 @@ export default class extends Controller {
     setTimeout(() => snackbar.remove(), 5000)
   }
 
+  deleteMeal(event) {
+    const meal = JSON.parse(event.detail[2].response)
+    this.calendarController.closeModal()
+    this.calendar.removeEvents(event => event.id === meal.id)
+  }
 }
 

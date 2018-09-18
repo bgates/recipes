@@ -16,7 +16,11 @@ export default class extends Controller {
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       eventClick: (calEvent, jsEvent, view) => {
-        fetch(calEvent.url)
+        fetch(calEvent.url, {
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+          }
+        })
           .then(response => response.text())
           .then(this.modal.show)
         console.log(calEvent, jsEvent, view)
@@ -32,5 +36,9 @@ export default class extends Controller {
 
   reloadEvents() {
     this.calendar.refetchEvents();
+  }
+
+  closeModal() {
+    this.modal.close()
   }
 }

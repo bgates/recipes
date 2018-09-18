@@ -1,5 +1,5 @@
 json.array! @meals do |meal|
-  json.extract! meal, :start, :title, :date, :time
+  json.extract! meal, :id, :start, :title, :date, :time
   json.recipe_line_items meal.recipe_line_items do |rec|
     json.name rec.name
     json.servings rec.servings

@@ -1,4 +1,6 @@
 class MealsController < ApplicationController
+  layout proc {|controller| controller.request.xhr? ? false: "application" }
+  before_action :find_meal, only: [ :show, :destroy ]
 
   def index
     @meal = Meal.new
@@ -13,13 +15,21 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.create(meal_params)
-    render json: @meal.for_calendar
   end
 
   def show
+  end
+
+  def destroy
+    @meal.destroy
+    render json: @meal
+  end
+
+private
+
+  def find_meal
     @meal = Meal.find(params[:id])
   end
-private
 
   def meal_params
     params.require(:meal).permit(:date, :time, recipe_line_items_attributes: [ :recipe_id, :servings ], ingredient_line_items_attributes: [ :ingredient_id, :unit_number, :unit_name ])
